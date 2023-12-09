@@ -1,0 +1,13 @@
+:root {
+	/* Dark */
+	--sidebar-background-color: #000000;
+    --sidebar-background-sec-color: #121212;
+    --sidebar-width: 300px;
+    --sidebar-width-closed: 75px;
+    --sidebar-hover-background-category: #272727;
+    --sidebar-hover-background-module: #4d4d4d;
+    --panel-radius: 8px;
+    --active-category-border-color: #1677a0;
+    --active-category-header-color: #d9edf7;
+    --active-category-text-color: #3a87ad;
+}
