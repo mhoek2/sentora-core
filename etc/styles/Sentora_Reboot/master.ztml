@@ -7,9 +7,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <!-- Stylesheets -->
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
         <link href="<# ui_tpl_assetfolderpath #>global-css/bootstrap.min.css" rel="stylesheet">
         <link href="<# ui_tpl_csspath #>" rel="stylesheet" type="text/css">
-
+		<link href="<# ui_tpl_assetfolderpath #>css/core/core.css" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Inter" rel="stylesheet">
+		
         <script src="<# ui_tpl_assetfolderpath #>js/jquery.js"></script>
         <script src="<# ui_tpl_assetfolderpath #>js/jquery.cookie.js"></script>
         <script src="<# ui_tpl_assetfolderpath #>js/jquery.sortable-custom.js"></script>
@@ -42,40 +45,76 @@
             <div class="zloader_content" id="zloader_content"></div>
         </div>
         <!-- END ZLOADER PROGRESSBAR DIV -->
+		
+		<!-- BEGIN TOP BAR -->
+		<div id="page-topbar">
+			<input type="checkbox" id="account_dropdown_state" value="1"/>
+			
+			<ul>			
+				<li>
+					<a href="https://forums.sentora.org/" target="_blank">
+						<i class="fa-regular fa-circle-question"></i>
+					</a>
+				</li>
+				<li>
+					<label for="account_dropdown_state"></label>
+					<a>
+						<i class="fa-regular fa-user"></i>
+						<span>hoeklab</span>
+					</a>
+					<ul>
+						<li>
+							<a href="?module=my_account">My Account</a>
+						</li>
+						<li>
+							<a href="?module=password_assistant">Change Password</a>
+						</li>
+						<li>
+							<a href="?module=usage_viewer">Usage Viewer</a>
+						</li>
+						<li>
+							<a href="?logout">Log out</a>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+		<!-- END TOP BAR -->
 
-        <!-- BEGIN NAVBAR -->
-        <div class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container">
-                <!-- .navbar-toggle is used as the toggle for collapsed navbar content -->
-                <a class="navbar-toggle navbar-inverse" data-toggle="collapse" data-target=".navbar-responsive-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </a>
-                <a class="navbar-brand" href="."><img src="<# ui_tpl_assetfolderpath #>img/logos/sentora_logo_header.png" width="96" height="36" alt="Home"></a>
-                <div class="nav-collapse collapse navbar-responsive-collapse">
-                    <ul class="nav navbar-nav">
-                        <li><a href="#" class="nav-stat-button" title="View Account Info" data-toggle="collapse" data-target="#stats-data"><i class="icon-chart-bar-2"></i></a></li>
-                        <# ui_tpl_modulelistznavbar #>
-                    </ul>
-                </div><!--/.nav-collapse -->
-            </div><!-- /.container -->
-        </div>
-        <!-- END NAVBAR -->
 
         <!-- BEGIN CONTAINER -->
         <div class="wrap container">
-            <div id="module-search-wrap" class="visible-lg visible-desktop">
-                <input type="text" id="module-search" data-provide="typeahead" placeholder="Search" autocomplete="off">
-            </div>
             <div class="inner-wrap">
-                <!-- BEGIN LEFT SIDEBAR -->
-                <div id="page-sidebar" class="col-lg-3 visible-desktop">
+				<input type="checkbox" id="sidebar_state" value="1"/>
+				
+				<!-- BEGIN LEFT SIDEBAR -->
+                <div id="page-sidebar" class="col-lg-3">
+					<label for="sidebar_state"></label>
+					
+					<a class="navbar-brand" href=".">
+						<img src="<# ui_tpl_assetfolderpath #>img/logos/sentora_logo_header.png" width="96" height="36" alt="Home">
+					</a>
+					
+					<input type="checkbox" id="search_state" value="1"/>
+					<label for="search_state">
+						<i class="fa-solid fa-magnifying-glass"></i>
+					</label>
+					
+	            	<div id="module-search-wrap">
+                		<input type="text" id="module-search" data-provide="typeahead" placeholder="Search" autocomplete="off">
+            		</div>	
+					
                     <ul id="menu-sidebar">
-                        <li id="acc-stats"><a class="stats-but" href="#"  data-toggle="collapse" data-target="#stats-data"><: Account Info :></a></li>
+						
+                        <li>
+							<a href="#" class="heading" data-toggle="collapse" data-target="#stats-data">
+								<: Quick Overview :>
+							</a>
+						</li>
+						
+						
                         <# ui_tpl_modulelistzsidebar #>
                     </ul>
-                    <div id="sidebar-bg"></div>
                 </div>
                 <!-- END LEFT SIDEBAR -->
 

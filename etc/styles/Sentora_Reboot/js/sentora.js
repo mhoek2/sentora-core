@@ -347,28 +347,79 @@ var Sentora = {
             $('#menu-sidebar li:has(ul) .heading').click(function() {
                 $(this).next().toggle();
                 if ($(this).next().is(':visible')) {
-                    $.cookie($(this).text().replace(/\+|-|\s/g, ''), 'expanded');
+                    $.cookie($($(this).contents()[0]).text().replace(/\+|-|\s/g, ''), 'expanded');
                     $(this).children('.open').text('-');
                 }
 
                 if ($(this).next().is(':hidden')) {
-                    $.cookie($(this).text().replace(/\+|-|\s/g, ''), 'collapsed');
+                    $.cookie($($(this).contents()[0]).text().replace(/\+|-|\s/g, ''), 'collapsed');
                     $(this).children('.open').text('+');
                 }
             });
 
             // Handle the Sidebar Menu state based on current Cookie values
             $('#menu-sidebar > li').each(function() {
-                var cookieName = $(this).children('.heading').text().replace(/\+|-|\s/g, '')
+                var cookieName = $($(this).children('.heading').contents()[0]).text().replace(/\+|-|\s/g, '');
                 var verticalNav = $.cookie(cookieName);
-
+				
                 if (verticalNav == 'expanded') {
                     $(this).find('ul').show();
                     $(this).find('.open').text('-');
                 }
+				
+				Sentora.menu.category.setIcon( cookieName, $(this).children('.heading') );
+				Sentora.menu.category.setTooltip( $(this).children('.heading'), $(this).children('.heading').text().slice(0, -2) );
+				
+				$(this).find('ul > li > a').each(function() {
+					Sentora.menu.category.setTooltip( $(this), $(this).text() );
+				});
             });
 
-        }
+			Sentora.menu.stateHandler();
+        },
+	
+		stateHandler: function() {
+			if ( $.cookie("sidebar_state") === "collapsed" )
+				$("#sidebar_state").prop( "checked", true );
+			
+			$("#sidebar_state").on('change', function() {
+				if ( $("#sidebar_state").prop('checked') ) {
+					$.cookie("sidebar_state", "collapsed")
+					return;
+				}
+				
+				$.cookie("sidebar_state", "open");
+			});
+		},
+			
+		category: {
+			icons: {					// unicode			weight
+				'default':				{ unicode:'\uf111', w:400 },	
+				'ServerAdmin': 			{ unicode:'\uf233', w:900 },
+				'AccountInformation': 	{ unicode:'\uf4fe', w:900 },
+				'Advanced': 			{ unicode:'\uf7d9', w:900 },
+				'DatabaseManagement': 	{ unicode:'\uf1c0', w:900 },
+				'DomainManagement': 	{ unicode:'\uf0ac', w:900 },
+				'Mail': 				{ unicode:'\uf0e0', w:400 },
+				//'Reseller':			{ unicode:'\uf0e0', w:400 },
+				'FileManagement': 		{ unicode:'\uf802', w:900 },	
+				'QuickOverview': 		{ unicode:'\uf06e', w:400 },	// ue4bf
+			},
+			
+			setTooltip: function( element, content ) {
+				let label = $('<label>').html( content );
+				
+				$( element ).append( label );
+			},
+			
+			setIcon: function( id, element ) {
+				if ( typeof Sentora.menu.category.icons[id] === 'undefined' )
+					id = "default";
+
+				$( element ).attr( 'data-fa-unicode', Sentora.menu.category.icons[id].unicode )
+				$( element ).addClass( 'fa-'+ Sentora.menu.category.icons[id].w );
+			}
+		}
 
     },
 
