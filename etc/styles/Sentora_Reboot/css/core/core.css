@@ -65,7 +65,10 @@ body, html {
     background: #e5e1e1;
     text-align: center;   
     font-size: 16px;
-	border-radius: 100%;
+	
+	-webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    border-radius: 100%;
 }  
 #page-topbar > ul > li > a span {
 	margin-left: 10px;
@@ -79,7 +82,10 @@ body, html {
     padding: 5px;
     border: 1px solid #d0d5dd;
     background: #fff;
-    border-radius: 8px;
+
+    -webkit-border-radius: var(--panel-radius);
+    -moz-border-radius: var(--panel-radius);
+    border-radius: var(--panel-radius);
 }
 #page-topbar > ul > li > ul li {
 
@@ -90,7 +96,10 @@ body, html {
     text-indent: 20px;
 	text-wrap: nowrap;
     font-size: 14px;
-    border-radius: 8px;    
+
+    -webkit-border-radius: var(--panel-radius);
+    -moz-border-radius: var(--panel-radius);
+    border-radius: var(--panel-radius);  
 }
 #page-topbar > ul > li > ul li a:hover {
 	background: #f1f1f1;
@@ -227,19 +236,20 @@ collapsable sidebar begin
 }
 
 #sidebar_state:checked + #page-sidebar > #module-search-wrap {
+	overflow: hidden;
 	width:0%;
 	margin-left: calc(5px + var(--sidebar-width-closed));
     background: var(--sidebar-background-color);
-    padding: 0px;
-    overflow: hidden;	
+    padding: 0px;  	
 }
 #sidebar_state:checked + #page-sidebar > #search_state:checked ~ #module-search-wrap {
-    width: var(--sidebar-width) !important;
+    overflow:visible;
+	width: var(--sidebar-width) !important;
     border: 3px solid var(--sidebar-background-color);
     -webkit-border-radius: var(--panel-radius);
     -moz-border-radius: var(--panel-radius);
     border-radius: var(--panel-radius);
-	overflow:visible;
+	
 	webkit-transition: width .4s ease 0s;
     transition: width .4s ease 0s;		
 }
@@ -325,7 +335,9 @@ collapsable sidebar begin
 
 #sidebar_state:checked + #page-sidebar #menu-sidebar > li:has(ul[style*="block"]) {
     background: var(--sidebar-background-sec-color);
-    border-radius: 8px;
+    -webkit-border-radius: var(--panel-radius);
+    -moz-border-radius: var(--panel-radius);
+    border-radius: var(--panel-radius);
 }
 #sidebar_state:checked + #page-sidebar #menu-sidebar > li:has(ul[style*="block"]) > .heading {
 	/*background: var(--sidebar-background-color);*/
@@ -354,7 +366,9 @@ collapsable sidebar begin
     font-size: 12px;
     text-indent: 0;
     font-weight: 400;
-    border-radius: 8px;
+    -webkit-border-radius: var(--panel-radius);
+    -moz-border-radius: var(--panel-radius);
+    border-radius: var(--panel-radius);
     border-left: 1px solid rgb(0 0 0 / 41%);	
 }
 #sidebar_state:checked + #page-sidebar #menu-sidebar > li .heading:hover > label {
@@ -636,11 +650,19 @@ li.highlight {
 	background:var(--sidebar-background-sec-color) !important;
 	border-color: var(--sidebar-background-sec-color);
 	color:#fff !important;
+	
+    -webkit-border-radius: var(--panel-radius);
+    -moz-border-radius: var(--panel-radius);
+    border-radius: var(--panel-radius);	
 }
 #module-search-wrap > span:nth-child(1) > #module-search {
 	background:rgb(7 81 113 / 22%) !important;
 	border-color: transparent;
 	color:#fff !important;
+	
+    -webkit-border-radius: var(--panel-radius);
+    -moz-border-radius: var(--panel-radius);
+    border-radius: var(--panel-radius);	
 }
 #module-search-wrap > span:nth-child(1) {
 	width:100%;
