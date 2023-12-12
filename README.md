@@ -10,6 +10,13 @@
 |--|--|
 | [![screenshot_001](https://raw.githubusercontent.com/mhoek2/sentora-core/master/screenshot_001.jpg)](https://github.com/mhoek2/sentora-core/blob/master/screenshot_001.jpg) | [![screenshot_002](https://raw.githubusercontent.com/mhoek2/sentora-core/master/screenshot_002.jpg)](https://github.com/mhoek2/sentora-core/blob/master/screenshot_002.jpg) |
 
+#### Theme with .svg icons
+Using .svg requires sentora-core changes.
+[Click here](https://github.com/mhoek2/sentora-core/tree/master/etc/styles/Sentora_Reboot#svg-icons) for more info.
+|  |  |
+|--|--|
+| [![screenshot_003](https://raw.githubusercontent.com/mhoek2/sentora-core/master/screenshot_003.jpg)](https://github.com/mhoek2/sentora-core/blob/master/screenshot_003.jpg) | [![screenshot_004](https://raw.githubusercontent.com/mhoek2/sentora-core/master/screenshot_004.jpg)](https://github.com/mhoek2/sentora-core/blob/master/screenshot_004.jpg) |
+
 ## Description
 
 [Sentora](http://sentora.org) is based on an original fork of ZPanelCP, Sentora is an open-source web hosting control panel written in PHP and is designed to work with Linux, UNIX and the BSDs.
