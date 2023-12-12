@@ -45,15 +45,28 @@ class ui_tpl_modulelist2column {
                         $cleanname = str_replace(" ", "ZP(br)", $translatename);
 
                         // Check is User Style Module Icon Exist
-                 if (file_exists('etc/styles/' . ui_template::GetUserTemplate() . '/img/modules/'.$mod['mo_folder_vc'].'/assets/icon.png')) {
-                            $icon = 'etc/styles/' . ui_template::GetUserTemplate() . '/img/modules/'.$mod['mo_folder_vc'].'/assets/icon.png';
+                 		/*
+						// deprecated
+						if (file_exists('etc/styles/' . ui_template::GetUserTemplate() . '/img/modules/'.$mod['mo_folder_vc'].'/assets/icon.svg')) {
+                            $icon = 'etc/styles/' . ui_template::GetUserTemplate() . '/img/modules/'.$mod['mo_folder_vc'].'/assets/icon.svg';
                         } else {
                             $icon = 'modules/' . $mod['mo_folder_vc'] . '/assets/icon.png';
                         }
-
+						*/
+						
                         $line .= '              <li>';
                         $line .= '                      <a href="?module=' . $mod['mo_folder_vc'] . '" title="<: ' . $mod['mo_desc_tx'] . ' :>">';
-                        $line .= '<img src="' .$icon. '" border="0">';
+						
+						$icon = ui_module::GetModuleIcon( $mod['mo_folder_vc'] );
+						switch ($icon['extension']) {
+							case ICON_EXTENSION_SVG:
+								$line .= $icon['svg_dom'];
+								break;
+							case ICON_EXTENSION_PNG:
+								$line .= '<img src="' .$icon['path']. '" border="0">';
+								break;
+						}
+						
                         $line .= '                      </a>';
                         $line .= '                      <br />';
                         $line .= '                      <a href="?module=' . $mod['mo_folder_vc'] . '"><: ' . $cleanname . ' :></a>';

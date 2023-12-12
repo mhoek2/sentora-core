@@ -13,6 +13,9 @@
  * @link http://www.zpanelcp.com/
  * @license GPL (http://www.gnu.org/licenses/gpl.html)
  */
+define("ICON_EXTENSION_PNG", "png");
+define("ICON_EXTENSION_SVG", "svg");
+
 class ui_module {
 
     function __construct() {
@@ -321,6 +324,81 @@ class ui_module {
         }
     }
 
+	private static $allowedIconExtensions = array( 
+		ICON_EXTENSION_SVG, 
+		ICON_EXTENSION_PNG 
+	);
+	
+    /**
+     * Parse SVG file to DOM element whilst removing comments and optionally setting size
+     * @author Marco H
+     * @param string $path The svg file path.
+     * @param boolean $keep_fill Retain all fill attributes
+     * @param int $width The inline width tag value without 'px'. tag removed on 'empty' or 'false'
+     * @param int $height The inline height tag value without 'px'. tag removed on 'empty' or 'false'
+     * @return Parsed <svg> DOM element.
+     */	
+	static private function parseSVG($path, $width = false, $height = false) {
+		if (!file_exists($path))
+			return false;
+		
+		try {
+			$svg_dom = new DOMDocument();
+
+			if (!$svg_dom->load($path)) {
+				echo "<b>Invalid svg:</b> ". $path;
+				return false;
+			}
+			
+			$svg = $svg_dom->getElementsByTagName('svg')[0];
+				
+			$width	? $svg->setAttribute('width', $width . 'px') 	: $svg->removeAttribute('width');
+			$height	? $svg->setAttribute('height', $height . 'px') 	: $svg->removeAttribute('height');
+		
+			return preg_replace('/<!--[\s\S]*?-->/', '', $svg_dom->saveHTML($svg));
+        } 
+		catch (Exception $e) {
+            return false;
+        }			
+	}
+	
+    /**
+     * Parse SVG file to DOM element whilst removing comments and optionally setting size
+     * @author Marco H
+     * @param string $modulefolder The module folder name of which to import the XML data from.
+     * @param int $width SVG Only: The inline width tag value without 'px'. tag removed on 'empty' or 'false'
+     * @param int $height SVG Only:The inline height tag value without 'px'. tag removed on 'empty' or 'false'
+     * @return Array File path, File extension and optionally svg DOM element.
+     */		
+	static function GetModuleIcon( $modulefolder, $svg_width = false, $svg_height = false ) {
+		$template_path = 'etc/styles/'. ui_template::GetUserTemplate() .'/';
+		$icon_path = 'img/modules/'. $modulefolder .'/assets';
+		
+		foreach (ui_module::$allowedIconExtensions as $extension) {
+			$path = sprintf("%s%s/icon.%s", $template_path, $icon_path, $extension);
+			
+			if (file_exists($path)) {
+				switch ($extension) {
+					case ICON_EXTENSION_SVG:
+						{
+							$svg_dom = ui_module::parseSVG($path, $svg_width, $svg_height);
+					
+							if (!$svg_dom)
+								continue;
+					
+							return array("path" => $path, "svg_dom" => $svg_dom, "extension" => $extension);
+						}
+						break;	
+					default:
+					case ICON_EXTENSION_PNG:
+						return array("path" => $path, "extension" => $extension);
+				}
+			}
+		}
+		
+		// return zpanel core default icon
+		return array("path" => sprintf("%s/icon.png", $icon_path), "extension" => ICON_EXTENSION_PNG);
+	}
 }
 
 ?>

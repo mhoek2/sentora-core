@@ -46,10 +46,14 @@ class ctrl_module
     {
         global $controller;
         $mod_dir = $controller->GetControllerRequest('URL', 'module');
+		
+		// deprecated
         // Check if the current userland theme has a module icon override
-        if (file_exists('etc/styles/' . ui_template::GetUserTemplate() . '/img/modules/' . $mod_dir . '/assets/icon.png'))
+        /*if (file_exists('etc/styles/' . ui_template::GetUserTemplate() . '/img/modules/' . $mod_dir . '/assets/icon.png'))
             return './etc/styles/' . ui_template::GetUserTemplate() . '/img/modules/' . $mod_dir . '/assets/icon.png';
-        return './modules/' . $mod_dir . '/assets/icon.png';
+        return './modules/' . $mod_dir . '/assets/icon.png';*/
+			
+		return ui_module::GetModuleIcon($mod_dir)['path'];
     }
 
     /**

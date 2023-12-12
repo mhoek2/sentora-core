@@ -50,7 +50,21 @@ class ui_tpl_modulelist {
                         }
                         $line .= "<td style=\"text-align:center;\" align=\"left\">";
                         $line .= "<a href=\"?module=" . $mod['mo_folder_vc'] . "\" title=\"<: " . $mod['mo_desc_tx'] . " :>\">";
-                        $line .= "<img src=\"modules/" . $mod['mo_folder_vc'] . "/assets/icon.png\" border=\"0\" />";
+						
+						// deprecated
+                        //$line .= "<img src=\"modules/" . $mod['mo_folder_vc'] . "/assets/icon.png\" border=\"0\" />";
+						{
+						$icon = ui_module::GetModuleIcon( $mod['mo_folder_vc'] );
+						
+						switch ($icon['extension']) {
+							case ICON_EXTENSION_SVG:
+								$line .= $icon['svg_dom'];
+								break;
+							case ICON_EXTENSION_PNG:
+								$line .= '<img src="' .$icon['path']. '" border="0">';
+								break;
+						}
+						
                         $line .= "</a>";
                         $line .= "<br />";
                         $line .= "<a href=\"?module=" . $mod['mo_folder_vc'] . "\">" . $cleanname . "</a>";

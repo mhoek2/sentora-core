@@ -74,7 +74,10 @@ class ui_tpl_modulelistznavbar
                     } else {
                         $line .= '<li>';
                     }
-                    if ($mod['mo_installed_ts'] != 0) {
+					
+                    /*
+					// deprecated
+					if ($mod['mo_installed_ts'] != 0) {
 						if (file_exists('etc/styles/' . ui_template::GetUserTemplate() . '/img/modules/'.$mod['mo_folder_vc'].'/assets/icon.png')) {
                             $line .= '<a href="?module=' . $mod['mo_folder_vc'] . '"><i class="icon-' . $class_name . ' greyscale"><img src="etc/styles/' . ui_template::GetUserTemplate() . '/img/modules/'.$mod['mo_folder_vc'].'/assets/icon.png" height="16px" width="16px"></i> <: ' . $mod['mo_name_vc'] . ' :></a></li>';
 						} else {
@@ -84,6 +87,27 @@ class ui_tpl_modulelistznavbar
                     } else {
                         $line .= '<a href="?module=' . $mod['mo_folder_vc'] . '"><i class="icon-' . $class_name . '"></i> <: ' . $mod['mo_name_vc'] . ' :></a></li>';
                     }
+					*/
+					
+					$module_icon = "";
+					$line .= '<a href="?module='. $mod['mo_folder_vc'] .'">';
+					
+					if ($mod['mo_installed_ts'] != 0) {
+						$icon = ui_module::GetModuleIcon( $mod['mo_folder_vc'], 16, 16 );
+						
+						switch ($icon['extension']) {
+							case ICON_EXTENSION_SVG:
+								$module_icon = $icon['svg_dom'];
+								break;
+							case ICON_EXTENSION_PNG:
+								$module_icon = '<img src="' .$icon['path']. '" height="16px" width="16px">';
+								break;
+						}
+						
+						$class_name .= " greyscale";
+					}
+
+                    $line .= '<i class="icon-'. $class_name .'">'. $module_icon .'</i> <: '. $mod['mo_name_vc'] .' :></a></li>';
                     
                 }
 // If Account tab, show Logout Menu Item
