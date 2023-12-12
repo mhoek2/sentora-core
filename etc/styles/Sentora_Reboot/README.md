@@ -1,22 +1,28 @@
-# Sentora Default Theme #
+
+# Sentora Reboot Theme #
 /* Sentora is a GPL fork of the ZPanel Project */:
 
 This document outlines some of the JavaScript and CSS functionality that is built into the Sentora theme.  You can use any of this in your own modules and themes that you build, as long as all the proper files are loaded.
 
 If you have any questions about this theme, please ask on the [Sentora Forums](http://forums.sentora.org/) or contact [Jason Davis](http://www.codedevelopr.com).
 
+## SVG Icons ##
+Apply [these changes](https://github.com/mhoek2/sentora-core/commit/46810092fad97bb442fc9c241b35377d706782b2) to add svg support
+
+The SVG icons used in this theme: [Solar Broken Lines](https://www.svgrepo.com/collection/solar-broken-line-icons/) - [License](https://www.svgrepo.com/page/licensing/#CC%20Attribution)
+
 ## Override Module Icons ##
 You can replace the module icons that come with a module on the Sentora dashboard screen with your own icons.
 
 To override a module's icon, simply create a folder and image file in this location...
 
-    /etc/styles/Sentora_Default/images/MODULE-NAME/assets/icon.png
+    /etc/styles/Sentora_Reboot/images/MODULE-NAME/assets/icon.png
 
 Replacing **MODULE-NAME** with the name of the module you are replacing.  The module name has to be the exact same name that the module uses in the module's folder for this override to work!
 
 An example to over-ride the MySQL Database module's icon...
 
-    /etc/styles/Sentora_Default/images/mysql_databases/assets/icon.png
+    /etc/styles/Sentora_REboot/images/mysql_databases/assets/icon.png
 
 ## Console Logging ##
 You can log to the Browsers JavaScript Console for debugging using this function below.

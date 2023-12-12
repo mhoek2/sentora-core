@@ -385,13 +385,41 @@ collapsable sidebar begin
 	border: 6px solid transparent;
 	border-right-color: #181717;
 }
-
-
-
 /*
 collapsable sidebar end
 */
 
+/* svg begin */
+#menu-sidebar ul li a svg {
+	transform: translateY(3px);
+}
+
+#menu-sidebar ul li a svg[stroke]:not([stroke="none"]),
+#menu-sidebar ul li a svg circle[stroke],
+#menu-sidebar ul li a svg path[stroke] {
+	stroke:#f1f1f1;
+}
+#menu-sidebar ul li a svg[fill]:not([fill="none"]),
+#menu-sidebar ul li a svg circle[fill],
+#menu-sidebar ul li a svg path[fill] {
+	fill:#f1f1f1;
+}
+
+.sortable.grid li ul li svg {
+	width:40px;	
+}
+
+.sortable.grid li ul li a svg[stroke]:not([stroke="none"]),
+.sortable.grid li ul li svg circle[stroke],
+.sortable.grid li ul li svg path[stroke] {
+	stroke:#6f6f6f;
+}
+.sortable.grid li ul li a svg[fill]:not([fill="none"]),
+.sortable.grid li ul li svg circle[fill],
+.sortable.grid li ul li svg path[fill] {
+	fill:#6f6f6f;	
+}
+/* svg end */
 
 /* bootstrap panel overrides */
 .zmodule_content.panel {
